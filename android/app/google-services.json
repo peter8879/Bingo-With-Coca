@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "360873882640",
+    "project_id": "bingo-with-coca",
+    "storage_bucket": "bingo-with-coca.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:360873882640:android:3e540d459dc5e26e1c0695",
+        "android_client_info": {
+          "package_name": "com.example.bingo_with_coca"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfyX5Q7YK5IhM-9JsSAyFiJR0dOge8W10"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
