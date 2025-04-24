@@ -4,4 +4,5 @@ import 'package:dartz/dartz.dart';
 abstract class CheckIdRepo{
   Future<Either<Failure,bool>> isIdFound(String id);
   Future<Either<Failure,bool>> isWin(String id);
+  Future<Either<Failure,bool>> canWinMore(String id);
 }

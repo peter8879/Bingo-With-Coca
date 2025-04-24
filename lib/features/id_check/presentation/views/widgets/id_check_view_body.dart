@@ -1,4 +1,6 @@
+import 'package:bingo_with_coca/core/helper_function/build_error_bar.dart';
 import 'package:bingo_with_coca/core/widgets/custom_text_field.dart' show CustomTextFormField;
+import 'package:bingo_with_coca/features/id_check/presentation/cubits/check_id_cubit/check_id_cubit.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/app_text_styles.dart';
@@ -70,10 +72,38 @@ class _IdCheckViewBodyState extends State<IdCheckViewBody> {
               ),
 
               GestureDetector(
-                onTap: (){
+                onTap: ()async {
+                 print(DateTime.now().toIso8601String());
                   if(globalKey.currentState!.validate())
                     {
                       globalKey.currentState!.save();
+                      await CheckIdCubit.get(context).checkId(id);
+                      if(CheckIdCubit.get(context).isFound)
+                        {
+                          await CheckIdCubit.get(context).canWinMore(id);
+                          if(CheckIdCubit.get(context).canWin) {
+                            await CheckIdCubit.get(context).checkWin(id);
+                            if (CheckIdCubit
+                                .get(context)
+                                .isWin) {
+
+                            }
+                            else {
+
+                            }
+                          }
+                          else
+                            {
+                              buildErrorBar(context, 'هذا المستخدم لا يمكنه الفوز بجوائز هذا الشهر');
+                            }
+                        }
+                      else
+                        {
+
+
+                        }
+
+
                     }
                   else
                     {
