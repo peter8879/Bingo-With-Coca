@@ -4,7 +4,6 @@ import 'package:bingo_with_coca/core/services/data_base_service.dart';
 import 'package:bingo_with_coca/core/utils/backend_end_points.dart';
 import 'package:bingo_with_coca/features/id_check/domain/check_id_repo.dart';
 import 'package:dartz/dartz.dart';
-import 'package:intl/intl.dart';
 
 
 class CheckIdRepoImpl implements CheckIdRepo{

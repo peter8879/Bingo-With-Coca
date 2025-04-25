@@ -8,7 +8,7 @@ abstract class AppTextStyles
   );
   static const TextStyle bold23 = TextStyle(
     fontWeight: FontWeight.bold,
-    fontSize: 23,
+    fontSize: 25,
     fontFamily: 'Arb'
   );
 

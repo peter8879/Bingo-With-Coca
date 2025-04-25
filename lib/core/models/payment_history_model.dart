@@ -24,6 +24,12 @@ class PaymentHistoryModel
       packBranch: entity.packBranch
     );
   }
+  PaymentHistoryEntity toEntity(){
+    return PaymentHistoryEntity(
+      packDate: packDate,
+      packBranch: packBranch
+    );
+  }
 
 
 

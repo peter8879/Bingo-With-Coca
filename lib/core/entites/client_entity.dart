@@ -6,7 +6,7 @@ class ClientEntity
 {
   final String id;
   final String name;
-  final String? lastPrizeDate;
+  String? lastPrizeDate;
   List<PrizeEntity> ?prizes;
   List<PaymentHistoryEntity> ?paymentHistory;
 

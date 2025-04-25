@@ -2,7 +2,6 @@ import 'package:bingo_with_coca/core/cubits/errors/faliures.dart';
 
 import 'package:bingo_with_coca/core/entites/branch_entity.dart';
 import 'package:bingo_with_coca/core/models/branch_model.dart';
-import 'package:bingo_with_coca/core/services/data_base_service.dart';
 import 'package:bingo_with_coca/core/utils/backend_end_points.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 

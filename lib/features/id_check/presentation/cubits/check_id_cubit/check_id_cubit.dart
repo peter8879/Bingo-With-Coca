@@ -1,3 +1,5 @@
+import 'package:bingo_with_coca/core/entites/client_entity.dart';
+import 'package:bingo_with_coca/core/repos/get_client__repo.dart';
 import 'package:bingo_with_coca/features/id_check/domain/check_id_repo.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,10 +9,12 @@ part 'check_id_state.dart';
 
 class CheckIdCubit extends Cubit<CheckIdState> {
   CheckIdRepo checkIdRepo;
+  GetClientRepo getClientRepo;
   bool isWin=false;
   bool isFound=false;
   bool canWin=false;
-  CheckIdCubit(this.checkIdRepo) : super(CheckIdInitial());
+  ClientEntity? clientEntity;
+  CheckIdCubit(this.checkIdRepo,this.getClientRepo) : super(CheckIdInitial());
   static CheckIdCubit get(context) => BlocProvider.of(context);
   Future<void> checkId(String id) async{
     emit(CheckIdInitial());
@@ -39,6 +43,7 @@ class CheckIdCubit extends Cubit<CheckIdState> {
   {
     var result=await checkIdRepo.isWin(id);
     result.fold((l) {
+      emit(CheckIdFailure(l.message));
 
     }, (r) {
       if(r){
@@ -65,6 +70,19 @@ class CheckIdCubit extends Cubit<CheckIdState> {
         canWin=false;
 
       }
+    });
+
+  }
+  Future<void> getClientData(String id)async
+  {
+    emit(GetClientLoading());
+    var result=await getClientRepo.getClient(id);
+    result.fold((l) {
+      emit(GetClientFailure(l.message));
+    }, (r) {
+      clientEntity=r;
+      emit(GetClientSuccess(r));
+
     });
 
   }

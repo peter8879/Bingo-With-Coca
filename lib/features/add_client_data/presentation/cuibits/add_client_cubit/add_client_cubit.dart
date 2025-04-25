@@ -17,7 +17,7 @@ class AddClientCubit extends Cubit<AddClientState> {
     result.fold((l) {
       emit(AddClientFailure(l.message));
     }, (r) {
-      emit(AddClientSuccess());
+      emit(AddClientSuccess(clientEntity: client));
     });
   }
 }

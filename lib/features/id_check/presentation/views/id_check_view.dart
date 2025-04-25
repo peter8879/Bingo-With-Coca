@@ -1,3 +1,4 @@
+import 'package:bingo_with_coca/core/repos/get_client__repo.dart';
 import 'package:bingo_with_coca/core/services/get_it_service.dart';
 import 'package:bingo_with_coca/core/widgets/background_image.dart';
 import 'package:bingo_with_coca/features/id_check/domain/check_id_repo.dart';
@@ -14,7 +15,7 @@ class IdCheckView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CheckIdCubit(getIt.get<CheckIdRepo>()),
+      create: (context) => CheckIdCubit(getIt.get<CheckIdRepo>(),getIt<GetClientRepo>()),
       child: BackgroundImage(
         child: Scaffold(
           backgroundColor: Colors.transparent,

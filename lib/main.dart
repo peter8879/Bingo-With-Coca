@@ -34,7 +34,7 @@ class BingoWithCoca extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           fontFamily: 'Arb',
-          colorScheme: ColorScheme.fromSeed(seedColor: Color(0xffE4002B)),
+          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xffE4002B)),
         ),
         locale: const Locale('ar'),
         localizationsDelegates:  const [

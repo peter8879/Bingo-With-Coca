@@ -6,6 +6,10 @@ sealed class AddClientState {}
 final class AddClientInitial extends AddClientState {}
 final class AddClientLoading extends AddClientState {}
 final class AddClientSuccess extends AddClientState {
+  final ClientEntity clientEntity;
+
+  AddClientSuccess({required this.clientEntity});
+
 }
 final class AddClientFailure extends AddClientState {
   final String errorMessage;

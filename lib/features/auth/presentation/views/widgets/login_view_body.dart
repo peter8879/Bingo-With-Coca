@@ -98,9 +98,11 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                         if(BranchesCubit.get(context).branches[i].name==value)
                           {
                             branchId=BranchesCubit.get(context).branches[i].id;
+                            branch=BranchesCubit.get(context).branches[i].name;
                             break;
                           }
                       }
+
                     AuthCubit.get(context).login(userId: user, branchId: branchId);
                   }
                   else

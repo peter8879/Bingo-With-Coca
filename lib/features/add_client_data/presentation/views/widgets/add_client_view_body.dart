@@ -1,11 +1,14 @@
 import 'package:bingo_with_coca/core/entites/client_entity.dart';
 import 'package:bingo_with_coca/core/helper_function/build_error_bar.dart';
+import 'package:bingo_with_coca/core/helper_function/build_success_bar.dart';
 import 'package:bingo_with_coca/core/utils/app_text_styles.dart' show AppTextStyles;
 import 'package:bingo_with_coca/core/widgets/custom_text_field.dart' show CustomTextFormField;
 import 'package:bingo_with_coca/features/add_client_data/presentation/cuibits/add_client_cubit/add_client_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+
+import '../../../../payment_history/presentation/views/payment_history_view.dart';
 
 class AddClientViewBody extends StatefulWidget {
   const AddClientViewBody({super.key, required this.id});
@@ -25,6 +28,8 @@ class _AddClientViewBodyState extends State<AddClientViewBody> {
   listener: (context, state) {
    if(state is AddClientSuccess)
      {
+       Navigator.pushNamed(context, PaymentHistoryView.routeName,arguments: state.clientEntity );
+       buildSuccessBar(context, 'تم اضافة العميل بنجاح');
 
      }
    if(state is AddClientFailure)
@@ -95,7 +100,7 @@ class _AddClientViewBodyState extends State<AddClientViewBody> {
 
                   },
                   child: Image.asset(
-                    'assets/images/التحقق.png',
+                    'assets/images/تسجيل.png',
                     width: 200,
                     height: 200,
                   ),

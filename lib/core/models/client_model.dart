@@ -6,7 +6,7 @@ class ClientModel
 {
   final String id;
   final String name;
-  final String? lastPrizeDate;
+   String? lastPrizeDate;
   List<PrizeModel> ?prizes;
   List<PaymentHistoryModel> ?paymentHistory;
 
@@ -31,7 +31,7 @@ class ClientModel
       'lastPrizeDate': lastPrizeDate,
       if(prizes != null)
       'prizes': prizes?.map((e) => e.toMap()).toList(),
-      if(paymentHistory != null)
+
       'paymentHistory': paymentHistory?.map((e) => e.toMap()).toList(),
     };
   }
@@ -43,6 +43,16 @@ class ClientModel
       lastPrizeDate: entity.lastPrizeDate,
       prizes: entity.prizes!=null?entity.prizes!.map((e) => PrizeModel.fromEntity(e)).toList():null,
       paymentHistory: entity.paymentHistory!=null?entity.paymentHistory!.map((e) => PaymentHistoryModel.fromEntity(e)).toList():null,
+    );
+  }
+  ClientEntity toEntity()
+  {
+    return ClientEntity(
+      id: id,
+      name: name,
+      lastPrizeDate: lastPrizeDate,
+      prizes: prizes!=null?prizes!.map((e) => e.toEntity()).toList():null,
+      paymentHistory: paymentHistory!=null?paymentHistory!.map((e) => e.toEntity()).toList():null,
     );
   }
 }

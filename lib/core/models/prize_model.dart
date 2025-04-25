@@ -51,4 +51,17 @@ class PrizeModel{
       pack3Branch: entity.pack3Branch
     );
   }
+  PrizeEntity toEntity()
+  {
+    return PrizeEntity(
+      name: name,
+      date: date,
+      pack1Date: pack1Date,
+      pack1Branch: pack1Branch,
+      pack2Date: pack2Date,
+      pack2Branch: pack2Branch,
+      pack3Date: pack3Date,
+      pack3Branch: pack3Branch
+    );
+  }
 }

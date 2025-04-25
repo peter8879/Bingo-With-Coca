@@ -10,5 +10,16 @@ final class CheckIdFailure extends CheckIdState {
 
   CheckIdFailure(this.errorMessage);
 }
+final class GetClientSuccess extends CheckIdState {
+  final ClientEntity client;
+
+  GetClientSuccess(this.client);
+}
+final class GetClientFailure extends CheckIdState {
+  final String errorMessage;
+
+  GetClientFailure(this.errorMessage);
+}
+final class GetClientLoading extends CheckIdState {}
 
 

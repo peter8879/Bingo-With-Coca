@@ -6,5 +6,7 @@ abstract class BackendEndPoints{
   static const String ifClientExist='clients';
   static const String getClient='clients';
   static const String addClient='clients';
+  static const String updateClient='clients';
+
 
 }
