@@ -11,7 +11,7 @@ class CheckIdCubit extends Cubit<CheckIdState> {
   CheckIdRepo checkIdRepo;
   GetClientRepo getClientRepo;
   bool isWin=false;
-  bool isFound=false;
+   bool? isFound;
   bool canWin=false;
   ClientEntity? clientEntity;
   CheckIdCubit(this.checkIdRepo,this.getClientRepo) : super(CheckIdInitial());
@@ -85,6 +85,10 @@ class CheckIdCubit extends Cubit<CheckIdState> {
 
     });
 
+  }
+  void setFound()
+  {
+    isFound=true;
   }
 
 

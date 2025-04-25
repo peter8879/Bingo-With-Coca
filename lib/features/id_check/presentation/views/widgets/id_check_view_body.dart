@@ -86,13 +86,13 @@ class _IdCheckViewBodyState extends State<IdCheckViewBody> {
 
                 GestureDetector(
                   onTap: () async {
-                    print(DateTime.now().toIso8601String());
+
                     if (globalKey.currentState!.validate()) {
                       globalKey.currentState!.save();
                       await CheckIdCubit.get(context).checkId(id);
                       if (CheckIdCubit
                           .get(context)
-                          .isFound) {
+                          .isFound!=null&&CheckIdCubit.get(context).isFound==true) {
                         await CheckIdCubit.get(context).canWinMore(id);
                         await CheckIdCubit.get(context).getClientData(id);
                         if (CheckIdCubit
@@ -102,6 +102,7 @@ class _IdCheckViewBodyState extends State<IdCheckViewBody> {
                           if (CheckIdCubit
                               .get(context)
                               .isWin) {
+                            CheckIdCubit.get(context).isFound=null;
                             Navigator.pushNamed(context, SelectPrizeView.routeName,arguments: CheckIdCubit.get(context).clientEntity!);
 
 
@@ -109,6 +110,7 @@ class _IdCheckViewBodyState extends State<IdCheckViewBody> {
                           else {
                             if(CheckIdCubit.get(context).clientEntity!=null)
                               {
+                                CheckIdCubit.get(context).isFound=null;
                                 Navigator.pushNamed(context, PaymentHistoryView.routeName,arguments: CheckIdCubit.get(context).clientEntity!);
                               }
 
@@ -121,11 +123,19 @@ class _IdCheckViewBodyState extends State<IdCheckViewBody> {
                         }
                       }
                       else {
-                        Navigator.pushNamed(
-                            context,
-                            AddClientView.routeName,
-                            arguments: id
-                        );
+                        if(CheckIdCubit.get(context).isFound==false) {
+                          CheckIdCubit.get(context).isFound=null;
+                          Navigator.pushNamed(
+                              context,
+                              AddClientView.routeName,
+                              arguments: id
+                          );
+
+                        }
+                        else if(CheckIdCubit.get(context).isFound==null)
+                          {
+                            buildErrorBar(context, 'حدث خطا برجاء اعادة المحاولة');
+                          }
                       }
                     }
                     else {

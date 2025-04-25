@@ -36,7 +36,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
       }
     else if(state is AuthFailure)
       {
-        buildErrorBar(context, state.errorMessage);
+        buildErrorBar(context, 'حدث خطا اثناء تسجيل الدخول');
       }
   },
   child: Center(
