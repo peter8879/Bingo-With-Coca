@@ -8,7 +8,6 @@ import 'package:bingo_with_coca/features/auth/presentation/views/widgets/choice_
 import 'package:bingo_with_coca/features/id_check/presentation/views/id_check_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' show BlocListener;
-import 'package:svg_flutter/svg.dart';
 
 class LoginViewBody extends StatefulWidget {
   const LoginViewBody({super.key});

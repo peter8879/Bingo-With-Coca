@@ -1,6 +1,5 @@
 import 'package:bingo_with_coca/core/cubits/branches_cubit/branches_cubit.dart';
 import 'package:bingo_with_coca/core/utils/app_text_styles.dart';
-import 'package:choice/choice.dart';
 import 'package:flutter/material.dart';
 
 class ChoiceWidget extends StatelessWidget {

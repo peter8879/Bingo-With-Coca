@@ -68,7 +68,7 @@ class CheckIdRepoImpl implements CheckIdRepo{
         else
         {
          var now=DateTime.now();
-         final formatter = DateFormat('yyyy-MM-dd HH:mm:ss.SSSSSS');
+
           DateTime lastPrizeDate = DateTime.parse(model.lastPrizeDate!);
           var difference = now.difference(lastPrizeDate);
 

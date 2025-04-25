@@ -1,5 +1,6 @@
 import 'package:bingo_with_coca/core/helper_function/build_error_bar.dart';
 import 'package:bingo_with_coca/core/widgets/custom_text_field.dart' show CustomTextFormField;
+import 'package:bingo_with_coca/features/add_client_data/presentation/views/add_client_view.dart';
 import 'package:bingo_with_coca/features/id_check/presentation/cubits/check_id_cubit/check_id_cubit.dart';
 import 'package:flutter/material.dart';
 
@@ -65,6 +66,10 @@ class _IdCheckViewBodyState extends State<IdCheckViewBody> {
                       {
                         return 'رقم قومي غير صالح';
                       }
+                    else if(value.length>14)
+                      {
+                        return 'رقم قومي غير صالح';
+                      }
                     return null;
 
                   },
@@ -99,7 +104,11 @@ class _IdCheckViewBodyState extends State<IdCheckViewBody> {
                         }
                       else
                         {
-
+                          Navigator.pushNamed(
+                              context,
+                              AddClientView.routeName,
+                            arguments: id
+                          );
 
                         }
 
