@@ -7,7 +7,7 @@ class PaymentHistoryHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsetsDirectional.only(start: 8,end: 8,top: 4,bottom: 4),
+      padding: const EdgeInsetsDirectional.only(start: 8,end: 8,top: 4,bottom: 4),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         color: Colors.white,

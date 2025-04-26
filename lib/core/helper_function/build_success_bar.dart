@@ -5,6 +5,12 @@ void buildSuccessBar(BuildContext context, String message) {
     SnackBar(
       content: Text(message),
       backgroundColor: Colors.green,
+      duration: const Duration(
+        seconds: 1
+      ),
+
+
+
 
     ),
   );

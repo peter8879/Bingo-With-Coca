@@ -22,7 +22,7 @@ class CustomTextFormField extends StatelessWidget {
       keyboardType: keyboardType,
       validator: validator==null?(value)
       {
-        if(value!.isEmpty||value==null)
+        if(value!.isEmpty)
         {
           return 'هذا الحقل مطلوب';
         }
@@ -30,7 +30,7 @@ class CustomTextFormField extends StatelessWidget {
       }:validator,
 
       decoration:  InputDecoration(
-        errorStyle: TextStyle(
+        errorStyle: const TextStyle(
           color: Colors.black
         ),
         filled: true,
@@ -52,8 +52,8 @@ class CustomTextFormField extends StatelessWidget {
   OutlineInputBorder buildBorder() {
     return OutlineInputBorder(
 
-        borderRadius: BorderRadius.circular(16),
-      borderSide: BorderSide(
+        borderRadius: BorderRadius.circular(60),
+      borderSide: const BorderSide(
         color: Colors.transparent
       )
 

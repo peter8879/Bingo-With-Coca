@@ -1,5 +1,4 @@
 import 'package:bingo_with_coca/features/auth/domain/auth_repo.dart';
-import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 

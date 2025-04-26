@@ -22,7 +22,7 @@ class LoginView extends StatelessWidget {
           body: BlocBuilder<BranchesCubit, BranchesState>(
             builder: (context, state) {
               if (state is BranchesLoading) {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(
                   ),
                 );
@@ -32,7 +32,7 @@ class LoginView extends StatelessWidget {
                   child: Text('Error: ${state.error}'),
                 );
               }
-              return LoginViewBody();
+              return const LoginViewBody();
             },
           ),
 

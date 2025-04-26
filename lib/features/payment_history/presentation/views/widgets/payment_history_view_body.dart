@@ -80,6 +80,7 @@ class _PaymentHistoryViewBodyState extends State<PaymentHistoryViewBody> {
              {
                if(widget.clientEntity.paymentHistory!.length==3)
                  {
+                   ScaffoldMessenger.of(context).clearSnackBars();
                    Navigator.pushReplacementNamed(context, SelectPrizeView.routeName,arguments: widget.clientEntity);
                  }
                else
@@ -103,210 +104,209 @@ class _PaymentHistoryViewBodyState extends State<PaymentHistoryViewBody> {
       builder: (context, state) {
         return ModalProgressHUD(
           inAsyncCall: state is UpdateClientLoading?true:false,
-          child: Center(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: MediaQuery
-                          .sizeOf(context)
-                          .height * 0.2,
-                    ),
-                    Center(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 5),
-                        child: FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: Text(
-                            'السجل الشرائى للعميل',
-                            textAlign: TextAlign.center,
-                            style: AppTextStyles.bold40.copyWith(color: Colors
-                                .white, fontSize: 35),
-                          ),
-                        ),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: MediaQuery
+                      .sizeOf(context)
+                      .height * 0.3,
+                ),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        'السجل الشرائى للعميل',
+                        textAlign: TextAlign.center,
+                        style: AppTextStyles.bold40.copyWith(color: Colors
+                            .white, fontSize: 35),
                       ),
-
                     ),
-                    const SizedBox(height: 20,),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12),
-                      child: Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16),
-                            color: const Color(0xFFcc4a4b)
-                        ),
-                        child: Column(
+                  ),
+
+                ),
+                const SizedBox(height: 20,),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        color: const Color(0xFFcc4a4b)
+                    ),
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 20,),
+                        const PaymentHistoryHeader(),
+                        const SizedBox(height: 30,),
+                        Row(
                           children: [
-                            const SizedBox(height: 20,),
-                            PaymentHistoryHeader(),
-                            const SizedBox(height: 30,),
-                            Row(
-                              children: [
 
-                                Expanded(
-                                  child: Transform.rotate(
+                            Expanded(
+                              child: Transform.rotate(
 
-                                    child: Icon(
-                                      Icons.horizontal_rule,
-                                      color: Colors.white,
-                                      size: 40,
-                                    ),
-                                    angle: 1.5708,
-                                  ),
+                                child: const Icon(
+                                  Icons.horizontal_rule,
+                                  color: Colors.white,
+                                  size: 40,
                                 ),
-                                Expanded(
-                                  child: Transform.rotate(
-
-                                    child: Icon(
-                                      Icons.horizontal_rule,
-                                      color: Colors.white,
-                                      size: 40,
-                                    ),
-                                    angle: 1.5708,
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Transform.rotate(
-
-                                    child: Icon(
-                                      Icons.horizontal_rule,
-                                      color: Colors.white,
-                                      size: 40,
-                                    ),
-                                    angle: 1.5708,
-                                  ),
-                                )
-                              ],
+                                angle: 1.5708,
+                              ),
                             ),
-                            const SizedBox(height: 30,),
-                            Row(
-                              children: [
+                            Expanded(
+                              child: Transform.rotate(
 
-                                Expanded(
-                                  child: Checkbox(
-                                    value: check1,
-                                    onChanged: (value) {
-                                      if (canChange1 == true) {
-                                        check1 = !check1;
-                                        setState(() {
-
-                                        });
-                                      }
-                                    },
-                                  ),
+                                child: const Icon(
+                                  Icons.horizontal_rule,
+                                  color: Colors.white,
+                                  size: 40,
                                 ),
-                                Expanded(
-                                  child: Checkbox(
-                                    value: check2,
-                                    onChanged: (value) {
-                                      if (canChange2 == true) {
-                                        check2 = !check2;
-                                        setState(() {
-
-                                        });
-                                      }
-                                    },
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Checkbox(
-                                    value: check3,
-                                    onChanged: (value) {
-                                      if (canChange3 == true) {
-                                        check3 = !check3;
-
-                                        setState(() {
-
-                                        });
-                                      }
-                                    },
-                                  ),
-                                )
-                              ],
+                                angle: 1.5708,
+                              ),
                             ),
+                            Expanded(
+                              child: Transform.rotate(
 
+                                child: const Icon(
+                                  Icons.horizontal_rule,
+                                  color: Colors.white,
+                                  size: 40,
+                                ),
+                                angle: 1.5708,
+                              ),
+                            )
+                          ],
+                        ),
+                        const SizedBox(height: 30,),
+                        Row(
+                          children: [
 
+                            Expanded(
+                              child: Checkbox(
+                                value: check1,
+                                onChanged: (value) {
+                                  if (canChange1 == true) {
+                                    check1 = !check1;
+                                    setState(() {
+
+                                    });
+                                  }
+                                },
+                              ),
+                            ),
+                            Expanded(
+                              child: Checkbox(
+                                value: check2,
+                                onChanged: (value) {
+                                  if (canChange2 == true) {
+                                    check2 = !check2;
+                                    setState(() {
+
+                                    });
+                                  }
+                                },
+                              ),
+                            ),
+                            Expanded(
+                              child: Checkbox(
+                                value: check3,
+                                onChanged: (value) {
+                                  if (canChange3 == true) {
+                                    check3 = !check3;
+
+                                    setState(() {
+
+                                    });
+                                  }
+                                },
+                              ),
+                            )
                           ],
                         ),
 
-                      ),
+
+                      ],
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        if (widget.clientEntity.paymentHistory == null) {
-                          print('lol');
-                          List<PaymentHistoryEntity> paymentHistory = [];
-                          if (check1 == true) {
-                            paymentHistory.add(PaymentHistoryEntity(
-                                packDate: DateTime.now().toIso8601String(),
-                                packBranch: branch
-                            ));
-                          }
-                          if (check2 == true) {
-                            paymentHistory.add(PaymentHistoryEntity(
-                                packDate: DateTime.now().toIso8601String(),
-                                packBranch: branch
-                            ));
-                          }
-                          if(check3==true)
-                          {
-                            paymentHistory.add(PaymentHistoryEntity(
-                                packDate: DateTime.now().toIso8601String(),
-                                packBranch: branch
-                            ));
 
-                          }
-                          widget.clientEntity.paymentHistory = paymentHistory;
-                        }
-                        else
-                        {
-
-                          if(widget.clientEntity.paymentHistory!.length==1)
-                          {
-                            if (check2 == true) {
-                              widget.clientEntity.paymentHistory!.add(PaymentHistoryEntity(
-                                  packDate: DateTime.now().toIso8601String(),
-                                  packBranch: branch
-                              ));
-                            }
-                            if(check3==true)
-                            {
-                              widget.clientEntity.paymentHistory!.add(PaymentHistoryEntity(
-                                  packDate: DateTime.now().toIso8601String(),
-                                  packBranch: branch
-                              ));
-
-                            }
-                          }
-                          else if(widget.clientEntity.paymentHistory!.length==2)
-                          {
-
-                            if(check3==true)
-                            {
-                              widget.clientEntity.paymentHistory!.add(PaymentHistoryEntity(
-                                  packDate: DateTime.now().toIso8601String(),
-                                  packBranch: branch
-                              ));
-
-                            }
-                          }
-                        }
-                        UpdateClientCubit.get(context).updateClient(widget.clientEntity);
-
-                      },
-
-                      child: Image.asset(
-                        'assets/images/تسجيل.png',
-                        width: 200,
-                        height: 200,
-                      ),
-                    )
-
-
-                  ],
+                  ),
                 ),
-              )
+                const SizedBox(height: 40,),
+                GestureDetector(
+                  onTap: () {
+                    if (widget.clientEntity.paymentHistory == null) {
+                      print('lol');
+                      List<PaymentHistoryEntity> paymentHistory = [];
+                      if (check1 == true) {
+                        paymentHistory.add(PaymentHistoryEntity(
+                            packDate: DateTime.now().toIso8601String(),
+                            packBranch: branch
+                        ));
+                      }
+                      if (check2 == true) {
+                        paymentHistory.add(PaymentHistoryEntity(
+                            packDate: DateTime.now().toIso8601String(),
+                            packBranch: branch
+                        ));
+                      }
+                      if(check3==true)
+                      {
+                        paymentHistory.add(PaymentHistoryEntity(
+                            packDate: DateTime.now().toIso8601String(),
+                            packBranch: branch
+                        ));
+
+                      }
+                      widget.clientEntity.paymentHistory = paymentHistory;
+                    }
+                    else
+                    {
+
+                      if(widget.clientEntity.paymentHistory!.length==1)
+                      {
+                        if (check2 == true) {
+                          widget.clientEntity.paymentHistory!.add(PaymentHistoryEntity(
+                              packDate: DateTime.now().toIso8601String(),
+                              packBranch: branch
+                          ));
+                        }
+                        if(check3==true)
+                        {
+                          widget.clientEntity.paymentHistory!.add(PaymentHistoryEntity(
+                              packDate: DateTime.now().toIso8601String(),
+                              packBranch: branch
+                          ));
+
+                        }
+                      }
+                      else if(widget.clientEntity.paymentHistory!.length==2)
+                      {
+
+                        if(check3==true)
+                        {
+                          widget.clientEntity.paymentHistory!.add(PaymentHistoryEntity(
+                              packDate: DateTime.now().toIso8601String(),
+                              packBranch: branch
+                          ));
+
+                        }
+                      }
+                    }
+                    UpdateClientCubit.get(context).updateClient(widget.clientEntity);
+
+                  },
+
+                  child: Image.asset(
+                    'assets/images/تسجيل.png',
+                    width: 200,
+                    height: 100,
+                  ),
+                )
+
+
+              ],
+            ),
           ),
         );
       },

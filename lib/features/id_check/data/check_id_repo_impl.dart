@@ -31,17 +31,17 @@ class CheckIdRepoImpl implements CheckIdRepo{
 
         if(model.paymentHistory!.length==3)
           {
-            return Right(true);
+            return const Right(true);
           }
         else
           {
-            return Right(false);
+            return const Right(false);
           }
 
       }
     else
       {
-        return Right(false);
+        return const Right(false);
       }
 
   }
@@ -62,7 +62,7 @@ class CheckIdRepoImpl implements CheckIdRepo{
 
         if(model.lastPrizeDate==null)
         {
-          return Right(true);
+          return const Right(true);
         }
         else
         {
@@ -73,19 +73,19 @@ class CheckIdRepoImpl implements CheckIdRepo{
 
           if(difference.inDays>30)
           {
-            return Right(true);
+            return const Right(true);
           }
           else
           {
 
-            return Right(false);
+            return const Right(false);
           }
         }
 
       }
       else
       {
-        return Right(true);
+        return const Right(true);
       }
 
     }

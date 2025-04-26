@@ -24,8 +24,8 @@ class _PrizeChoiceWidgetState extends State<PrizeChoiceWidget> {
     return Container(
       height: 60,
       decoration: BoxDecoration(
-        color: Color(0xFFcc4a4b),
-        borderRadius: BorderRadius.circular(16),
+        color: const Color(0xFFcc4a4b),
+        borderRadius: BorderRadius.circular(60),
 
       ),
       child: DropdownButton(
@@ -42,13 +42,13 @@ class _PrizeChoiceWidgetState extends State<PrizeChoiceWidget> {
         ),
         style: AppTextStyles.bold19.copyWith(color: Colors.white),
         borderRadius: BorderRadius.circular(16),
-        focusColor: Color(0xFFcc4a4b),
+        focusColor: const Color(0xFFcc4a4b),
         elevation: 0,
         autofocus: true,
         isExpanded: true,
-        padding: EdgeInsets.symmetric(horizontal: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 12),
         value: widget.value,
-        underline: SizedBox(),
+        underline: const SizedBox(),
         hint: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(

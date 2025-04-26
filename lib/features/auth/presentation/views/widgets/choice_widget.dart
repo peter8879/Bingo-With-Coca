@@ -12,16 +12,20 @@ class ChoiceWidget extends StatelessWidget {
     return Container(
       height: 60,
       decoration: BoxDecoration(
-        color: Color(0xFFcc4a4b),
-        borderRadius: BorderRadius.circular(16),
+        color: const Color(0xFFcc4a4b),
+        borderRadius: BorderRadius.circular(60),
 
       ),
       child: DropdownButton(
+        alignment: AlignmentDirectional.centerStart,
+
+
         icon: Padding(
           padding: const EdgeInsetsDirectional.only(
            top: 10,
             bottom: 10
           ),
+
           child: Image.asset(
             'assets/images/Store ID Icon.png',
             width: 50,
@@ -30,13 +34,13 @@ class ChoiceWidget extends StatelessWidget {
         ),
         style: AppTextStyles.bold19.copyWith(color: Colors.white),
         borderRadius: BorderRadius.circular(16),
-        focusColor: Color(0xFFcc4a4b),
+        focusColor: const Color(0xFFcc4a4b),
         elevation: 0,
         autofocus: true,
         isExpanded: true,
-        padding: EdgeInsets.symmetric(horizontal: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 12),
         value: value,
-        underline: SizedBox(),
+        underline: const SizedBox(),
         hint: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(

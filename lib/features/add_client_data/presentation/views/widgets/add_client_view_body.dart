@@ -28,6 +28,7 @@ class _AddClientViewBodyState extends State<AddClientViewBody> {
   listener: (context, state) {
    if(state is AddClientSuccess)
      {
+       ScaffoldMessenger.of(context).clearSnackBars();
        Navigator.pushNamed(context, PaymentHistoryView.routeName,arguments: state.clientEntity );
        buildSuccessBar(context, 'تم اضافة العميل بنجاح');
 
@@ -40,75 +41,73 @@ class _AddClientViewBodyState extends State<AddClientViewBody> {
   builder: (context, state) {
     return ModalProgressHUD(
       inAsyncCall: state is AddClientLoading?true:false,
-      child: Center(
-        child: SingleChildScrollView(
-          child:Form(
-            key: globalKey,
-            autovalidateMode: autoValidateMode,
-            child: Column(
-              children: [
-                SizedBox(
-                  height: MediaQuery.sizeOf(context).height*0.1,
-                ),
-                Center(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 5),
-                    child: Text(
-                      'أضافه عميل جديد',
-                      textAlign: TextAlign.center,
-                      style: AppTextStyles.bold40.copyWith(color: Colors.white),
-                    ),
-                  ),
-
-                ),
-                const SizedBox(height: 20,),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: CustomTextFormField(
-                    hint: 'أسم العميل',
-                    keyboardType: TextInputType.text,
-                    suffixIcon: Image.asset(
-                      'assets/images/ID Icon.png',
-                      width: 20,
-                      height: 20,
-                    ),
-                    onSaved: (value)
-                    {
-                      name=value!;
-
-                    },
-
+      child: SingleChildScrollView(
+        child:Form(
+          key: globalKey,
+          autovalidateMode: autoValidateMode,
+          child: Column(
+            children: [
+              SizedBox(
+                height: MediaQuery.sizeOf(context).height*0.3,
+              ),
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  child: Text(
+                    'أضافه عميل جديد',
+                    textAlign: TextAlign.center,
+                    style: AppTextStyles.bold40.copyWith(color: Colors.white),
                   ),
                 ),
-                GestureDetector(
-                  onTap: (){
-                    if(globalKey.currentState!.validate())
-                      {
-                        globalKey.currentState!.save();
-                        ClientEntity client=ClientEntity(
-                          id: widget.id,
-                          name: name,
-                        );
-                        AddClientCubit.get(context).AddClient(client);
-                      }
-                    else
-                      {
-                        autoValidateMode=AutovalidateMode.always;
 
-
-                      }
+              ),
+              const SizedBox(height: 20,),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: CustomTextFormField(
+                  hint: 'أسم العميل',
+                  keyboardType: TextInputType.text,
+                  suffixIcon: Image.asset(
+                    'assets/images/ID Icon.png',
+                    width: 20,
+                    height: 20,
+                  ),
+                  onSaved: (value)
+                  {
+                    name=value!;
 
                   },
-                  child: Image.asset(
-                    'assets/images/تسجيل.png',
-                    width: 200,
-                    height: 200,
-                  ),
-                )
+
+                ),
+              ),
+              GestureDetector(
+                onTap: (){
+                  if(globalKey.currentState!.validate())
+                    {
+                      globalKey.currentState!.save();
+                      ClientEntity client=ClientEntity(
+                        id: widget.id,
+                        name: name,
+                      );
+                      AddClientCubit.get(context).AddClient(client);
+                    }
+                  else
+                    {
+                      autoValidateMode=AutovalidateMode.always;
 
 
-              ],
-            ),
+                    }
+
+                },
+                child: Image.asset(
+                  'assets/images/تسجيل.png',
+                  width: 200,
+                  height: 100,
+                ),
+              )
+
+
+            ],
           ),
         ),
       ),

@@ -16,7 +16,7 @@ class IdCheckView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => CheckIdCubit(getIt.get<CheckIdRepo>(),getIt<GetClientRepo>()),
-      child: BackgroundImage(
+      child: const BackgroundImage(
         child: Scaffold(
           backgroundColor: Colors.transparent,
           body: IdCheckViewBody(),

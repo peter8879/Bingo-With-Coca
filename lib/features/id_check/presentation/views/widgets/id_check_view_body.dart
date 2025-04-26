@@ -31,125 +31,127 @@ class _IdCheckViewBodyState extends State<IdCheckViewBody> {
             buildErrorBar(context, 'حدث خطأ برجاء اعادة المحاولة');
           }
       },
-      child: Center(
-        child: SingleChildScrollView(
-          child: Form(
-            autovalidateMode: autoValidateMode,
-            key: globalKey,
-            child: Column(
-              children: [
-                SizedBox(
-                  height: MediaQuery
-                      .sizeOf(context)
-                      .height * 0.1,
-                ),
-                Center(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 5),
-                    child: Text(
-                      'البحث عن '
-                          'رقم بطاقة العميل',
-                      textAlign: TextAlign.center,
-                      style: AppTextStyles.bold40.copyWith(color: Colors.white),
-                    ),
-                  ),
-
-                ),
-                const SizedBox(height: 20,),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: CustomTextFormField(
-                    hint: 'الرقم القومى للعميل',
-                    keyboardType: TextInputType.number,
-                    suffixIcon: Image.asset(
-                      'assets/images/ID Check Icon.png',
-                      width: 20,
-                      height: 20,
-                    ),
-                    onSaved: (value) {
-                      id = value!;
-                    },
-                    validator: (value) {
-                      if (value!.isEmpty || value == null) {
-                        return 'هذا الحقل مطلوب';
-                      }
-                      else if (value.length < 14) {
-                        return 'رقم قومي غير صالح';
-                      }
-                      else if (value.length > 14) {
-                        return 'رقم قومي غير صالح';
-                      }
-                      return null;
-                    },
+      child: SingleChildScrollView(
+        child: Form(
+          autovalidateMode: autoValidateMode,
+          key: globalKey,
+          child: Column(
+            children: [
+              SizedBox(
+                height: MediaQuery
+                    .sizeOf(context)
+                    .height * 0.3,
+              ),
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  child: Text(
+                    'البحث عن '
+                        'رقم بطاقة العميل',
+                    textAlign: TextAlign.center,
+                    style: AppTextStyles.bold40.copyWith(color: Colors.white),
                   ),
                 ),
 
-                GestureDetector(
-                  onTap: () async {
+              ),
+              const SizedBox(height: 20,),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: CustomTextFormField(
+                  hint: 'الرقم القومى للعميل',
+                  keyboardType: TextInputType.number,
+                  suffixIcon: Image.asset(
+                    'assets/images/ID Check Icon.png',
+                    width: 20,
+                    height: 20,
+                  ),
+                  onSaved: (value) {
+                    id = value!;
+                  },
+                  validator: (value) {
+                    if (value!.isEmpty ) {
+                      return 'هذا الحقل مطلوب';
+                    }
+                    else if (value.length < 14) {
+                      return 'رقم قومي غير صالح';
+                    }
+                    else if (value.length > 14) {
+                      return 'رقم قومي غير صالح';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              const SizedBox(height: 40,),
 
-                    if (globalKey.currentState!.validate()) {
-                      globalKey.currentState!.save();
-                      await CheckIdCubit.get(context).checkId(id);
+              GestureDetector(
+                onTap: () async {
+
+                  if (globalKey.currentState!.validate()) {
+                    globalKey.currentState!.save();
+                    await CheckIdCubit.get(context).checkId(id);
+                    if (CheckIdCubit
+                        .get(context)
+                        .isFound!=null&&CheckIdCubit.get(context).isFound==true) {
+                      await CheckIdCubit.get(context).canWinMore(id);
+                      await CheckIdCubit.get(context).getClientData(id);
                       if (CheckIdCubit
                           .get(context)
-                          .isFound!=null&&CheckIdCubit.get(context).isFound==true) {
-                        await CheckIdCubit.get(context).canWinMore(id);
-                        await CheckIdCubit.get(context).getClientData(id);
+                          .canWin) {
+                        await CheckIdCubit.get(context).checkWin(id);
                         if (CheckIdCubit
                             .get(context)
-                            .canWin) {
-                          await CheckIdCubit.get(context).checkWin(id);
-                          if (CheckIdCubit
-                              .get(context)
-                              .isWin) {
-                            CheckIdCubit.get(context).isFound=null;
-                            Navigator.pushNamed(context, SelectPrizeView.routeName,arguments: CheckIdCubit.get(context).clientEntity!);
+                            .isWin) {
+                          CheckIdCubit.get(context).isFound=null;
+                          ScaffoldMessenger.of(context).clearSnackBars();
+                          Navigator.pushNamed(context, SelectPrizeView.routeName,arguments: CheckIdCubit.get(context).clientEntity!);
 
 
-                          }
-                          else {
-                            if(CheckIdCubit.get(context).clientEntity!=null)
-                              {
-                                CheckIdCubit.get(context).isFound=null;
-                                Navigator.pushNamed(context, PaymentHistoryView.routeName,arguments: CheckIdCubit.get(context).clientEntity!);
-                              }
-
-
-                          }
                         }
                         else {
-                          buildErrorBar(context,
-                              'هذا المستخدم لا يمكنه الفوز بجوائز هذا الشهر');
+                          if(CheckIdCubit.get(context).clientEntity!=null)
+                            {
+                              CheckIdCubit.get(context).isFound=null;
+                              ScaffoldMessenger.of(context).clearSnackBars();
+                              Navigator.pushNamed(context, PaymentHistoryView.routeName,arguments: CheckIdCubit.get(context).clientEntity!);
+                            }
+
+
                         }
                       }
                       else {
-                        if(CheckIdCubit.get(context).isFound==false) {
-                          CheckIdCubit.get(context).isFound=null;
-                          Navigator.pushNamed(
-                              context,
-                              AddClientView.routeName,
-                              arguments: id
-                          );
-
-                        }
-                        else if(CheckIdCubit.get(context).isFound==null)
-                          {
-                            buildErrorBar(context, 'حدث خطا برجاء اعادة المحاولة');
-                          }
+                        buildErrorBar(context,
+                            'هذا المستخدم لا يمكنه الفوز بجوائز هذا الشهر');
                       }
                     }
                     else {
-                      autoValidateMode = AutovalidateMode.always;
+                      if(CheckIdCubit.get(context).isFound==false) {
+                        CheckIdCubit.get(context).isFound=null;
+                        ScaffoldMessenger.of(context).clearSnackBars();
+                        Navigator.pushNamed(
+                            context,
+                            AddClientView.routeName,
+                            arguments: id
+                        );
+
+                      }
+                      else if(CheckIdCubit.get(context).isFound==null)
+                        {
+                          buildErrorBar(context, 'حدث خطا برجاء اعادة المحاولة');
+                        }
                     }
-                  },
-                  child: Image.asset(
-                    'assets/images/التحقق.png',
-                    width: 200,
-                    height: 200,
-                  ),
-                )
-              ],
-            ),
+                  }
+                  else {
+                    autoValidateMode = AutovalidateMode.always;
+                  }
+                },
+                child: Image.asset(
+                  'assets/images/التحقق.png',
+                  width: 200,
+                  height: 100,
+                ),
+              )
+            ],
           ),
         ),
       ),

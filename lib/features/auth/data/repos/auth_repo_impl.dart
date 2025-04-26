@@ -25,11 +25,11 @@ class AuthRepoImpl implements AuthRepo
            {
              var branchData=await dataBaseService.getData(path: BackendEndPoints.getBranchData,id: branch);
              branch= branchData['id'];
-             return Right(true);
+             return const Right(true);
            }
          else
            {
-             return Right(false);
+             return const Right(false);
            }
 
 
@@ -38,7 +38,7 @@ class AuthRepoImpl implements AuthRepo
        }
      else
        {
-         return Right(false);
+         return const Right(false);
        }
    }
    catch(e){

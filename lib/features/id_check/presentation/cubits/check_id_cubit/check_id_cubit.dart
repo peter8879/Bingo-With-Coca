@@ -1,7 +1,6 @@
 import 'package:bingo_with_coca/core/entites/client_entity.dart';
 import 'package:bingo_with_coca/core/repos/get_client__repo.dart';
 import 'package:bingo_with_coca/features/id_check/domain/check_id_repo.dart';
-import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 
