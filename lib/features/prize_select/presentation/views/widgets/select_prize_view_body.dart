@@ -29,7 +29,9 @@ class _SelectPrizeViewBodyState extends State<SelectPrizeViewBody> {
     if(state is AddPrizeSuccess)
       {
         ScaffoldMessenger.of(context).clearSnackBars();
-        Navigator.pushReplacementNamed(context, IdCheckView.routeName);
+        Navigator.pushNamedAndRemoveUntil(context, IdCheckView.routeName,
+            (route) => false,
+        );
         buildSuccessBar(context, 'تم اضافه الهدية بنجاح');
       }
     else if(state is AddPrizeFailure)

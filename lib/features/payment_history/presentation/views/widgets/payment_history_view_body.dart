@@ -9,7 +9,6 @@ import 'package:bingo_with_coca/features/prize_select/presentation/views/select_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-
 import '../../../../../core/cubits/update_client_cubit/update_client_cubit.dart';
 import '../../../../../core/utils/app_text_styles.dart';
 
@@ -81,18 +80,21 @@ class _PaymentHistoryViewBodyState extends State<PaymentHistoryViewBody> {
                if(widget.clientEntity.paymentHistory!.length==3)
                  {
                    ScaffoldMessenger.of(context).clearSnackBars();
-                   Navigator.pushReplacementNamed(context, SelectPrizeView.routeName,arguments: widget.clientEntity);
+                   Navigator.pushNamedAndRemoveUntil(context, SelectPrizeView.routeName,(route)=>false
+                       ,arguments: widget.clientEntity);
                  }
                else
                  {
+                   ScaffoldMessenger.of(context).clearSnackBars();
                    buildSuccessBar(context, 'تم التسجيل بنجاح');
-                   Navigator.pushReplacementNamed(context, IdCheckView.routeName);
+                   Navigator.pushNamedAndRemoveUntil(context, IdCheckView.routeName,(route)=>false);
                  }
              }
            else
              {
+               ScaffoldMessenger.of(context).clearSnackBars();
                buildSuccessBar(context, 'تم التسجيل بنجاح');
-               Navigator.pushReplacementNamed(context, IdCheckView.routeName);
+               Navigator.pushNamedAndRemoveUntil(context, IdCheckView.routeName,(route)=>false);
              }
           }
         else if(state is UpdateClientFailure)
