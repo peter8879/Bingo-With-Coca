@@ -20,6 +20,7 @@ class AddClientViewBody extends StatefulWidget {
 
 class _AddClientViewBodyState extends State<AddClientViewBody> {
   late String name;
+  late String phoneNumber;
   AutovalidateMode autoValidateMode=AutovalidateMode.disabled;
   GlobalKey<FormState> globalKey=GlobalKey();
   @override
@@ -80,6 +81,37 @@ class _AddClientViewBodyState extends State<AddClientViewBody> {
 
                 ),
               ),
+              const SizedBox(height: 20,),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: CustomTextFormField(
+                  hint: 'رقم هاتف العميل',
+                  keyboardType: TextInputType.phone,
+                  suffixIcon: Image.asset(
+                    'assets/images/ID Icon.png',
+                    width: 20,
+                    height: 20,
+                  ),
+                  onSaved: (value)
+                  {
+                    phoneNumber=value!;
+
+                  },
+                  validator: (value){
+                    if (value!.isEmpty ) {
+                      return 'هذا الحقل مطلوب';
+                    }
+                    else if (value.length < 11) {
+                      return 'رقم هاتف غير صالح';
+                    }
+                    else if (value.length > 11) {
+                      return 'رقم هاتف غير صالح';
+                    }
+                    return null;
+                  },
+
+                ),
+              ),
               GestureDetector(
                 onTap: (){
                   if(globalKey.currentState!.validate())
@@ -88,6 +120,7 @@ class _AddClientViewBodyState extends State<AddClientViewBody> {
                       ClientEntity client=ClientEntity(
                         id: widget.id,
                         name: name,
+                        phoneNumber: phoneNumber
                       );
                       AddClientCubit.get(context).AddClient(client);
                     }

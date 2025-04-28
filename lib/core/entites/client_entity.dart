@@ -6,11 +6,12 @@ class ClientEntity
 {
   final String id;
   final String name;
+  final String phoneNumber;
   String? lastPrizeDate;
   List<PrizeEntity> ?prizes;
   List<PaymentHistoryEntity> ?paymentHistory;
 
-  ClientEntity({required this.id, required this.name,  this.lastPrizeDate,this.paymentHistory,this.prizes});
+  ClientEntity({required this.id, required this.name,  this.lastPrizeDate,this.paymentHistory,this.prizes,required this.phoneNumber});
 
 
 }

@@ -11,7 +11,7 @@ class BackgroundImage extends StatelessWidget {
               image: AssetImage(
                 'assets/images/Full Background.png',
               ),
-              fit: BoxFit.fitHeight
+              fit: BoxFit.fill
 
           )
       ),

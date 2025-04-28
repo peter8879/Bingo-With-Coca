@@ -1,6 +1,7 @@
 import 'package:bingo_with_coca/core/helper_function/build_error_bar.dart';
 import 'package:bingo_with_coca/core/widgets/custom_text_field.dart'
     show CustomTextFormField;
+import 'package:bingo_with_coca/features/add_all_clients/presentation/views/add_all_clients_view.dart';
 import 'package:bingo_with_coca/features/add_client_data/presentation/views/add_client_view.dart';
 import 'package:bingo_with_coca/features/id_check/presentation/cubits/check_id_cubit/check_id_cubit.dart';
 import 'package:bingo_with_coca/features/prize_select/presentation/views/select_prize.dart';
@@ -47,7 +48,7 @@ class _IdCheckViewBodyState extends State<IdCheckViewBody> {
                   padding: const EdgeInsets.symmetric(horizontal: 5),
                   child: Text(
                     'البحث عن '
-                        'رقم بطاقة العميل',
+                        'رقم بطاقة او هاتف العميل',
                     textAlign: TextAlign.center,
                     style: AppTextStyles.bold40.copyWith(color: Colors.white),
                   ),
@@ -58,7 +59,7 @@ class _IdCheckViewBodyState extends State<IdCheckViewBody> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: CustomTextFormField(
-                  hint: 'الرقم القومى للعميل',
+                  hint: 'الرقم القومى او رقم الهاتف للعميل',
                   keyboardType: TextInputType.number,
                   suffixIcon: Image.asset(
                     'assets/images/ID Check Icon.png',
@@ -72,9 +73,13 @@ class _IdCheckViewBodyState extends State<IdCheckViewBody> {
                     if (value!.isEmpty ) {
                       return 'هذا الحقل مطلوب';
                     }
-                    else if (value.length < 14) {
-                      return 'رقم قومي غير صالح';
+                    else if (value.length < 11) {
+                      return 'قيمة غير صالحه';
                     }
+                    else if(value.length==12||value.length==13)
+                      {
+                        return 'قيمة غير صالحه';
+                      }
                     else if (value.length > 14) {
                       return 'رقم قومي غير صالح';
                     }
@@ -150,7 +155,19 @@ class _IdCheckViewBodyState extends State<IdCheckViewBody> {
                   width: 200,
                   height: 100,
                 ),
-              )
+              ),
+              const SizedBox(height: 30,),
+              GestureDetector(
+                onTap: (){
+                  ScaffoldMessenger.of(context).clearSnackBars();
+                  Navigator.pushNamed(context, AddAllClientsView.routeName);
+                },
+                child: Image.asset(
+                  'assets/images/احصاء عدد العملاء.png',
+                  width: 200,
+                  height: 100,
+                ),
+              ),
             ],
           ),
         ),

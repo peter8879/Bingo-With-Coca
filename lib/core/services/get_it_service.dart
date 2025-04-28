@@ -4,6 +4,8 @@ import 'package:bingo_with_coca/core/repos/get_client__repo.dart';
 import 'package:bingo_with_coca/core/repos/get_client_repo_impl.dart';
 import 'package:bingo_with_coca/core/services/data_base_service.dart';
 import 'package:bingo_with_coca/core/services/fire_store_service.dart';
+import 'package:bingo_with_coca/features/add_all_clients/data/repos/add_all_clients_repo_impl.dart';
+import 'package:bingo_with_coca/features/add_all_clients/domain/repos/add_all_clients_repo.dart';
 import 'package:bingo_with_coca/features/add_client_data/data/add_client_repo_impl.dart';
 import 'package:bingo_with_coca/features/add_client_data/domain/repo/add_client_repo.dart';
 import 'package:bingo_with_coca/features/auth/data/repos/auth_repo_impl.dart';
@@ -27,6 +29,7 @@ void setup() {
   getIt.registerSingleton<AddClientRepo>(AddClientRepoImpl(dataBaseService: getIt<DataBaseService>()));
   getIt.registerSingleton<GetClientRepo>(GetClientRepoImpl(dataBaseService: getIt<DataBaseService>() ));
   getIt.registerSingleton<UpdateClientRepo>(UpdateClientRepoImpl(dataBaseService: getIt<DataBaseService>()));
+  getIt.registerSingleton<AddAllClientsRepo>(AddAllClientsRepoImpl(dataBaseService:getIt<DataBaseService>() ));
 
 
 }

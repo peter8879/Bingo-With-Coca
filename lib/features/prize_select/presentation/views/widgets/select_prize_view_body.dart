@@ -114,6 +114,7 @@ class _SelectPrizeViewBodyState extends State<SelectPrizeViewBody> {
                   {
                     List<PrizeEntity> prizes=[];
 
+
                     PrizeEntity prize=PrizeEntity(
                       name: value,
                       date: DateTime.now().toIso8601String(),
@@ -129,6 +130,7 @@ class _SelectPrizeViewBodyState extends State<SelectPrizeViewBody> {
                     );
                     prizes.add(prize);
                     widget.clientEntity.prizes=prizes;
+                    widget.clientEntity.lastPrizeDate= widget.clientEntity.paymentHistory![0].packDate;
                     widget.clientEntity.paymentHistory=null;
                   }
                   else
@@ -144,14 +146,13 @@ class _SelectPrizeViewBodyState extends State<SelectPrizeViewBody> {
                       pack3Branch: widget.clientEntity.paymentHistory![2].packBranch,
                       pack3Date: widget.clientEntity.paymentHistory![2].packDate,
 
-
                     );
                     widget.clientEntity.prizes!.add(prize);
+                    widget.clientEntity.lastPrizeDate= widget.clientEntity.paymentHistory![0].packDate;
                     widget.clientEntity.paymentHistory=null;
-
                   }
                   widget.clientEntity.paymentHistory=null;
-                  widget.clientEntity.lastPrizeDate=DateTime.now().toIso8601String();
+
                   AddPrizeCubit.get(context).addPrize(widget.clientEntity);
                 }
                 else

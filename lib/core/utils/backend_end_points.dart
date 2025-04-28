@@ -7,6 +7,9 @@ abstract class BackendEndPoints{
   static const String getClient='clients';
   static const String addClient='clients';
   static const String updateClient='clients';
+  static const String checkDateAdded='allClients';
+  static const String getDate='allClients';
+  static const String addDate='allClients';
 
 
 }

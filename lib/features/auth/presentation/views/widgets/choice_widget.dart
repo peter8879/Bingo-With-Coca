@@ -23,7 +23,8 @@ class ChoiceWidget extends StatelessWidget {
         icon: Padding(
           padding: const EdgeInsetsDirectional.only(
            top: 10,
-            bottom: 10
+            bottom: 10,
+
           ),
 
           child: Image.asset(

@@ -6,17 +6,19 @@ class ClientModel
 {
   final String id;
   final String name;
+  final String phoneNumber;
    String? lastPrizeDate;
   List<PrizeModel> ?prizes;
   List<PaymentHistoryModel> ?paymentHistory;
 
-  ClientModel({required this.id, required this.name,  this.lastPrizeDate,this.prizes,this.paymentHistory});
+  ClientModel({required this.id, required this.name,  this.lastPrizeDate,this.prizes,this.paymentHistory,required this.phoneNumber});
 
   factory ClientModel.fromJson(Map<String, dynamic> json)
   {
     return ClientModel(
       id: json['id'],
       name: json['name'],
+      phoneNumber: json['phoneNumber'],
       lastPrizeDate: json['lastPrizeDate'],
       prizes: json['prizes']!=null? (json['prizes'] as List).map((e) => PrizeModel.fromJson(e)).toList():null,
       paymentHistory:json['paymentHistory']!=null? (json['paymentHistory'] as List).map((e) => PaymentHistoryModel.fromJson(e)).toList():null,
@@ -27,6 +29,7 @@ class ClientModel
     return {
       'id': id,
       'name': name,
+      'phoneNumber': phoneNumber,
       if(lastPrizeDate != null)
       'lastPrizeDate': lastPrizeDate,
       if(prizes != null)
@@ -40,6 +43,7 @@ class ClientModel
     return ClientModel(
       id: entity.id,
       name: entity.name,
+      phoneNumber: entity.phoneNumber,
       lastPrizeDate: entity.lastPrizeDate,
       prizes: entity.prizes!=null?entity.prizes!.map((e) => PrizeModel.fromEntity(e)).toList():null,
       paymentHistory: entity.paymentHistory!=null?entity.paymentHistory!.map((e) => PaymentHistoryModel.fromEntity(e)).toList():null,
@@ -50,6 +54,7 @@ class ClientModel
     return ClientEntity(
       id: id,
       name: name,
+      phoneNumber: phoneNumber,
       lastPrizeDate: lastPrizeDate,
       prizes: prizes!=null?prizes!.map((e) => e.toEntity()).toList():null,
       paymentHistory: paymentHistory!=null?paymentHistory!.map((e) => e.toEntity()).toList():null,
