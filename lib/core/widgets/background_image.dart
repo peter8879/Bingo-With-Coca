@@ -6,9 +6,10 @@ class BackgroundImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration:  BoxDecoration(
           image: DecorationImage(
               image: AssetImage(
+                MediaQuery.sizeOf(context).width>900?"assets/images/BackgroundWeb.png":
                 'assets/images/Full Background.png',
               ),
               fit: BoxFit.fill

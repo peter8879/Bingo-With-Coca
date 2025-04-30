@@ -10,6 +10,4 @@ abstract class BackendEndPoints{
   static const String checkDateAdded='allClients';
   static const String getDate='allClients';
   static const String addDate='allClients';
-
-
 }
