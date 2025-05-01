@@ -69,7 +69,10 @@ class CheckIdRepoImpl implements CheckIdRepo{
          var now=DateTime.now();
 
           DateTime lastPrizeDate = DateTime.parse(model.lastPrizeDate!);
-          var difference = now.difference(lastPrizeDate);
+          if(lastPrizeDate.month==4)
+            {
+              lastPrizeDate =DateTime.parse('2025-05-01T00:10:49.208');
+            }
 
           if(lastPrizeDate.year == now.year && lastPrizeDate.month < now.month)
           {
