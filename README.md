@@ -1,16 +1,18 @@
-# bingo_with_coca
+## Bingo with Coca
 
-A new Flutter project.
+A two-part Flutter & Firebase solution for Coca-Cola Egypt’s seasonal “Buy & Win” promotion:
 
-## Getting Started
+- **📱 Mobile App**
+    - User registration, purchase code submission, and real-time prize notifications
+    - Offline data capture with automatic synchronization
+    - Firestore integration for secure, scalable data management
 
-This project is a starting point for a Flutter application.
+- **💻 Web Dashboard**
+    - Live analytics: branch sales vs. prize redemptions
+    - Interactive charts & date filters for data-driven insights
+    - Role-based access controls (admin vs. branch manager)
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Tech Stack
+- Flutter & Dart (mobile & web)
+- Firebase (Auth, Firestore, Hosting)
+- Google Charts (via Flutter packages)
