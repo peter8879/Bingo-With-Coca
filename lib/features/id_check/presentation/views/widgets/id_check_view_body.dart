@@ -6,6 +6,7 @@ import 'package:bingo_with_coca/features/add_client_data/presentation/views/add_
 import 'package:bingo_with_coca/features/id_check/presentation/cubits/check_id_cubit/check_id_cubit.dart';
 import 'package:bingo_with_coca/features/prize_select/presentation/views/select_prize.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/utils/app_text_styles.dart';
@@ -59,6 +60,9 @@ class _IdCheckViewBodyState extends State<IdCheckViewBody> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
                 child: CustomTextFormField(
+                  onChanged: (value){
+                    globalKey.currentState!.validate();
+                  },
                   hint: 'الرقم القومى او رقم الهاتف للعميل',
                   keyboardType: TextInputType.number,
                   suffixIcon: Image.asset(
@@ -73,18 +77,31 @@ class _IdCheckViewBodyState extends State<IdCheckViewBody> {
                     if (value!.isEmpty ) {
                       return 'هذا الحقل مطلوب';
                     }
-                    else if (value.length < 11) {
-                      return 'قيمة غير صالحه';
+                    if(!RegExp(r'^[0-9]+$').hasMatch(value))
+                    {
+                      return 'من فضلك ادخل ارقام انجليزية فقط';
                     }
-                    else if(value.length==12||value.length==13)
+
+                    else
                       {
-                        return 'قيمة غير صالحه';
+                        if (value.length < 11) {
+                          return 'قيمة غير صالحه';
+                        }
+                        else if(value.length==12||value.length==13)
+                        {
+                          return 'قيمة غير صالحه';
+                        }
+
+                        else if (value.length > 14) {
+                          return 'رقم قومي غير صالح';
+                        }
+
                       }
-                    else if (value.length > 14) {
-                      return 'رقم قومي غير صالح';
-                    }
+
+
                     return null;
                   },
+
                 ),
               ),
               const SizedBox(height: 40,),

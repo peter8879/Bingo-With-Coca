@@ -98,15 +98,24 @@ class _AddClientViewBodyState extends State<AddClientViewBody> {
 
                   },
                   validator: (value){
+
                     if (value!.isEmpty ) {
                       return 'هذا الحقل مطلوب';
                     }
-                    else if (value.length < 11) {
-                      return 'رقم هاتف غير صالح';
+                    if(!RegExp(r'^[0-9]+$').hasMatch(value))
+                    {
+                      return 'من فضلك ادخل ارقام انجليزية فقط';
                     }
-                    else if (value.length > 11) {
-                      return 'رقم هاتف غير صالح';
-                    }
+                    else
+                      {
+                        if (value.length < 11) {
+                          return 'رقم هاتف غير صالح';
+                        }
+                        else if (value.length > 11) {
+                          return 'رقم هاتف غير صالح';
+                        }
+                      }
+
                     return null;
                   },
 
