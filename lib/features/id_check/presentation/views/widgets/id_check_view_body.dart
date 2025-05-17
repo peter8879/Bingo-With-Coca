@@ -87,13 +87,56 @@ class _IdCheckViewBodyState extends State<IdCheckViewBody> {
                         if (value.length < 11) {
                           return 'قيمة غير صالحه';
                         }
+                        else if(value.length==11)
+                          {
+                             const  pattern = r'^(\+201|01|00201)[0-2,5]{1}[0-9]{8}$';
+                            final regex = RegExp(pattern);
+
+                            if (!regex.hasMatch(value)) {
+                              return 'رقم هاتف غير صحيح';
+                            }
+                          }
                         else if(value.length==12||value.length==13)
                         {
                           return 'قيمة غير صالحه';
                         }
+                        else if(value.length==14)
+                          {
+                            int gen = int.parse(value.substring(0, 1));
+                            int year = int.parse(value.substring(1, 3));
+                            int month = int.parse(value.substring(3, 5));
+                            int day = int.parse(value.substring(5, 7));
+
+                            if (gen == 3 && year > 10git ) {
+                              return 'رقم قومى غير صالح';
+                            }
+
+                            if (month < 1 || month > 12) {
+                              return 'رقم قومى غير صالح';
+                            }
+
+                            int dof;
+                            switch (month) {
+                              case 2:
+                                dof = 28;
+                                break;
+                              case 4:
+                              case 6:
+                              case 9:
+                              case 11:
+                                dof = 30;
+                                break;
+                              default:
+                                dof = 31;
+                            }
+
+                            if (day < 1 || day > dof) {
+                              return 'رقم قومى غير صالح';
+                            }
+                          }
 
                         else if (value.length > 14) {
-                          return 'رقم قومي غير صالح';
+                          return 'قيمة غير صالحة';
                         }
 
                       }
