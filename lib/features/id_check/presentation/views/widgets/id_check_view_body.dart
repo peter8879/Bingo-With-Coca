@@ -107,7 +107,7 @@ class _IdCheckViewBodyState extends State<IdCheckViewBody> {
                             int month = int.parse(value.substring(3, 5));
                             int day = int.parse(value.substring(5, 7));
 
-                            if (gen == 3 && year > 10git ) {
+                            if (gen == 3 && year > 10) {
                               return 'رقم قومى غير صالح';
                             }
 

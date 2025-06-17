@@ -41,7 +41,16 @@ class _PaymentHistoryViewBodyState extends State<PaymentHistoryViewBody> {
       canChange3 = true;
     }
     else {
-      if (widget.clientEntity.paymentHistory!.length == 1) {
+      if(widget.clientEntity.paymentHistory!.length==0)
+        {
+          check1 = false;
+          canChange1 = true;
+          check2 = false;
+          canChange2 = true;
+          check3 = false;
+          canChange3 = true;
+        }
+      else if (widget.clientEntity.paymentHistory!.length == 1) {
         check1 = true;
         canChange1 = false;
         check2 = false;
@@ -57,7 +66,7 @@ class _PaymentHistoryViewBodyState extends State<PaymentHistoryViewBody> {
         check3 = false;
         canChange3 = true;
       }
-      else {
+      else if(widget.clientEntity.paymentHistory!.length==3) {
         check1 = true;
         canChange1 = false;
         check2 = true;
@@ -114,6 +123,15 @@ class _PaymentHistoryViewBodyState extends State<PaymentHistoryViewBody> {
                       .sizeOf(context)
                       .height * 0.3,
                 ),
+                if(widget.clientEntity.prizes!=null)
+                  Text(
+                    'هذا العميل فاز ب ${widget.clientEntity.prizes!.length} جائزة مسبقا✅',
+                    textAlign: TextAlign.center,
+                    style: AppTextStyles.bold40.copyWith(color: Colors
+                        .white, fontSize: 18),
+                  ),
+                if(widget.clientEntity.prizes!=null)
+                  const SizedBox(height: 15,),
                 Center(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -237,64 +255,128 @@ class _PaymentHistoryViewBodyState extends State<PaymentHistoryViewBody> {
                 const SizedBox(height: 40,),
                 GestureDetector(
                   onTap: () {
-                    if (widget.clientEntity.paymentHistory == null) {
-                      print('lol');
-                      List<PaymentHistoryEntity> paymentHistory = [];
-                      if (check1 == true) {
-                        paymentHistory.add(PaymentHistoryEntity(
-                            packDate: DateTime.now().toIso8601String(),
-                            packBranch: branch
-                        ));
-                      }
-                      if (check2 == true) {
-                        paymentHistory.add(PaymentHistoryEntity(
-                            packDate: DateTime.now().toIso8601String(),
-                            packBranch: branch
-                        ));
-                      }
-                      if(check3==true)
-                      {
-                        paymentHistory.add(PaymentHistoryEntity(
-                            packDate: DateTime.now().toIso8601String(),
-                            packBranch: branch
-                        ));
+                    if(widget.clientEntity.paymentHistory==null){
+                      if (widget.clientEntity.paymentHistory == null) {
 
-                      }
-                      widget.clientEntity.paymentHistory = paymentHistory;
-                    }
-                    else
-                    {
-
-                      if(widget.clientEntity.paymentHistory!.length==1)
-                      {
+                        List<PaymentHistoryEntity> paymentHistory = [];
+                        if (check1 == true) {
+                          paymentHistory.add(PaymentHistoryEntity(
+                              packDate: DateTime.now().toIso8601String(),
+                              packBranch: branch
+                          ));
+                        }
                         if (check2 == true) {
-                          widget.clientEntity.paymentHistory!.add(PaymentHistoryEntity(
+                          paymentHistory.add(PaymentHistoryEntity(
                               packDate: DateTime.now().toIso8601String(),
                               packBranch: branch
                           ));
                         }
                         if(check3==true)
                         {
-                          widget.clientEntity.paymentHistory!.add(PaymentHistoryEntity(
+                          paymentHistory.add(PaymentHistoryEntity(
                               packDate: DateTime.now().toIso8601String(),
                               packBranch: branch
                           ));
 
                         }
+                        widget.clientEntity.paymentHistory = paymentHistory;
                       }
-                      else if(widget.clientEntity.paymentHistory!.length==2)
+                      else
+
                       {
 
-                        if(check3==true)
+                        if(widget.clientEntity.paymentHistory!.length==1)
                         {
-                          widget.clientEntity.paymentHistory!.add(PaymentHistoryEntity(
-                              packDate: DateTime.now().toIso8601String(),
-                              packBranch: branch
-                          ));
+                          if (check2 == true) {
+                            widget.clientEntity.paymentHistory!.add(PaymentHistoryEntity(
+                                packDate: DateTime.now().toIso8601String(),
+                                packBranch: branch
+                            ));
+                          }
+                          if(check3==true)
+                          {
+                            widget.clientEntity.paymentHistory!.add(PaymentHistoryEntity(
+                                packDate: DateTime.now().toIso8601String(),
+                                packBranch: branch
+                            ));
 
+                          }
+                        }
+                        else if(widget.clientEntity.paymentHistory!.length==2)
+                        {
+
+                          if(check3==true)
+                          {
+                            widget.clientEntity.paymentHistory!.add(PaymentHistoryEntity(
+                                packDate: DateTime.now().toIso8601String(),
+                                packBranch: branch
+                            ));
+
+                          }
                         }
                       }
                     }
+                    else{
+                      if (widget.clientEntity.paymentHistory!.length==0) {
+
+                        List<PaymentHistoryEntity> paymentHistory = [];
+                        if (check1 == true) {
+                          paymentHistory.add(PaymentHistoryEntity(
+                              packDate: DateTime.now().toIso8601String(),
+                              packBranch: branch
+                          ));
+                        }
+                        if (check2 == true) {
+                          paymentHistory.add(PaymentHistoryEntity(
+                              packDate: DateTime.now().toIso8601String(),
+                              packBranch: branch
+                          ));
+                        }
+                        if(check3==true)
+                        {
+                          paymentHistory.add(PaymentHistoryEntity(
+                              packDate: DateTime.now().toIso8601String(),
+                              packBranch: branch
+                          ));
+
+                        }
+                        widget.clientEntity.paymentHistory = paymentHistory;
+                      }
+                      else
+                      {
+
+                        if(widget.clientEntity.paymentHistory!.length==1)
+                        {
+                          if (check2 == true) {
+                            widget.clientEntity.paymentHistory!.add(PaymentHistoryEntity(
+                                packDate: DateTime.now().toIso8601String(),
+                                packBranch: branch
+                            ));
+                          }
+                          if(check3==true)
+                          {
+                            widget.clientEntity.paymentHistory!.add(PaymentHistoryEntity(
+                                packDate: DateTime.now().toIso8601String(),
+                                packBranch: branch
+                            ));
+
+                          }
+                        }
+                        else if(widget.clientEntity.paymentHistory!.length==2)
+                        {
+
+                          if(check3==true)
+                          {
+                            widget.clientEntity.paymentHistory!.add(PaymentHistoryEntity(
+                                packDate: DateTime.now().toIso8601String(),
+                                packBranch: branch
+                            ));
+
+                          }
+                        }
+                      }
+                    }
+
                     UpdateClientCubit.get(context).updateClient(widget.clientEntity);
 
                   },
