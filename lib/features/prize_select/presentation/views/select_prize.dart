@@ -1,4 +1,5 @@
 import 'package:bingo_with_coca/core/entites/client_entity.dart';
+import 'package:bingo_with_coca/core/repos/upload_image_repo.dart';
 import 'package:bingo_with_coca/core/services/get_it_service.dart';
 import 'package:bingo_with_coca/core/widgets/background_image.dart';
 import 'package:bingo_with_coca/features/prize_select/presentation/views/widgets/select_prize_view_body.dart';
@@ -17,7 +18,7 @@ class SelectPrizeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AddPrizeCubit(getIt<UpdateClientRepo>()),
+      create: (context) => AddPrizeCubit(getIt<UpdateClientRepo>(),getIt<UploadImageRepo>()),
       child: BackgroundImage(
         child: Scaffold(
           backgroundColor: Colors.transparent,

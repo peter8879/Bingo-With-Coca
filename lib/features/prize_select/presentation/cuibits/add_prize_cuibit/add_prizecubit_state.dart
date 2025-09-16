@@ -11,4 +11,11 @@ final class AddPrizeFailure extends AddPrizeState {
 }
 final class AddPrizeLoading extends AddPrizeState {}
 
+final class PickImageSuccess extends AddPrizeState {
 
+}
+final class PickImageFailure extends AddPrizeState {
+  final String errorMessage;
+  PickImageFailure(this.errorMessage);
+}
+final class PickImageLoading extends AddPrizeState {}

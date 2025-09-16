@@ -13,11 +13,12 @@ class BranchesCubit extends Cubit<BranchesState> {
   static BranchesCubit get(context) => BlocProvider.of(context);
   Future getAllBranches()async
   {
+
     emit(BranchesLoading());
     final result=await branchRepo.getAllBranches();
     result.fold((l) {
       emit(BranchesError(l.message));
-    }, (r) {
+    }, (r) async{
       branches = r;
       emit(BranchesLoaded());
     });

@@ -50,30 +50,11 @@ class _PaymentHistoryViewBodyState extends State<PaymentHistoryViewBody> {
           check3 = false;
           canChange3 = true;
         }
-      else if (widget.clientEntity.paymentHistory!.length == 1) {
-        check1 = true;
-        canChange1 = false;
-        check2 = false;
-        canChange2 = true;
-        check3 = false;
-        canChange3 = true;
-      }
-      else if (widget.clientEntity.paymentHistory!.length == 2) {
-        check1 = true;
-        canChange1 = false;
-        check2 = true;
-        canChange2 = false;
-        check3 = false;
-        canChange3 = true;
-      }
-      else if(widget.clientEntity.paymentHistory!.length==3) {
-        check1 = true;
-        canChange1 = false;
-        check2 = true;
-        canChange2 = false;
-        check3 = true;
-        canChange3 = false;
-      }
+      else if(widget.clientEntity.paymentHistory!.length<3)
+        {
+          check1 = false;
+          canChange1 = true;
+        }
     }
     super.initState();
   }
@@ -216,33 +197,7 @@ class _PaymentHistoryViewBodyState extends State<PaymentHistoryViewBody> {
                                 },
                               ),
                             ),
-                            Expanded(
-                              child: Checkbox(
-                                value: check2,
-                                onChanged: (value) {
-                                  if (canChange2 == true) {
-                                    check2 = !check2;
-                                    setState(() {
 
-                                    });
-                                  }
-                                },
-                              ),
-                            ),
-                            Expanded(
-                              child: Checkbox(
-                                value: check3,
-                                onChanged: (value) {
-                                  if (canChange3 == true) {
-                                    check3 = !check3;
-
-                                    setState(() {
-
-                                    });
-                                  }
-                                },
-                              ),
-                            )
                           ],
                         ),
 
@@ -264,96 +219,35 @@ class _PaymentHistoryViewBodyState extends State<PaymentHistoryViewBody> {
                               packDate: DateTime.now().toIso8601String(),
                               packBranch: branch
                           ));
-                        }
-                        if (check2 == true) {
                           paymentHistory.add(PaymentHistoryEntity(
                               packDate: DateTime.now().toIso8601String(),
                               packBranch: branch
                           ));
-                        }
-                        if(check3==true)
-                        {
                           paymentHistory.add(PaymentHistoryEntity(
                               packDate: DateTime.now().toIso8601String(),
                               packBranch: branch
                           ));
 
                         }
+
                         widget.clientEntity.paymentHistory = paymentHistory;
                       }
-                      else
 
-                      {
-
-                        if(widget.clientEntity.paymentHistory!.length==1)
-                        {
-                          if (check2 == true) {
-                            widget.clientEntity.paymentHistory!.add(PaymentHistoryEntity(
-                                packDate: DateTime.now().toIso8601String(),
-                                packBranch: branch
-                            ));
-                          }
-                          if(check3==true)
-                          {
-                            widget.clientEntity.paymentHistory!.add(PaymentHistoryEntity(
-                                packDate: DateTime.now().toIso8601String(),
-                                packBranch: branch
-                            ));
-
-                          }
-                        }
-                        else if(widget.clientEntity.paymentHistory!.length==2)
-                        {
-
-                          if(check3==true)
-                          {
-                            widget.clientEntity.paymentHistory!.add(PaymentHistoryEntity(
-                                packDate: DateTime.now().toIso8601String(),
-                                packBranch: branch
-                            ));
-
-                          }
-                        }
-                      }
                     }
-                    else{
-                      if (widget.clientEntity.paymentHistory!.length==0) {
-
-                        List<PaymentHistoryEntity> paymentHistory = [];
-                        if (check1 == true) {
-                          paymentHistory.add(PaymentHistoryEntity(
-                              packDate: DateTime.now().toIso8601String(),
-                              packBranch: branch
-                          ));
-                        }
-                        if (check2 == true) {
-                          paymentHistory.add(PaymentHistoryEntity(
-                              packDate: DateTime.now().toIso8601String(),
-                              packBranch: branch
-                          ));
-                        }
-                        if(check3==true)
-                        {
-                          paymentHistory.add(PaymentHistoryEntity(
-                              packDate: DateTime.now().toIso8601String(),
-                              packBranch: branch
-                          ));
-
-                        }
-                        widget.clientEntity.paymentHistory = paymentHistory;
-                      }
-                      else
+                    else
                       {
-
                         if(widget.clientEntity.paymentHistory!.length==1)
-                        {
-                          if (check2 == true) {
+                          {
+                            widget.clientEntity.paymentHistory!.add(PaymentHistoryEntity(
+                                packDate: DateTime.now().toIso8601String(),
+                                packBranch: branch
+                            ));
                             widget.clientEntity.paymentHistory!.add(PaymentHistoryEntity(
                                 packDate: DateTime.now().toIso8601String(),
                                 packBranch: branch
                             ));
                           }
-                          if(check3==true)
+                        if(widget.clientEntity.paymentHistory!.length==2)
                           {
                             widget.clientEntity.paymentHistory!.add(PaymentHistoryEntity(
                                 packDate: DateTime.now().toIso8601String(),
@@ -361,21 +255,8 @@ class _PaymentHistoryViewBodyState extends State<PaymentHistoryViewBody> {
                             ));
 
                           }
-                        }
-                        else if(widget.clientEntity.paymentHistory!.length==2)
-                        {
-
-                          if(check3==true)
-                          {
-                            widget.clientEntity.paymentHistory!.add(PaymentHistoryEntity(
-                                packDate: DateTime.now().toIso8601String(),
-                                packBranch: branch
-                            ));
-
-                          }
-                        }
                       }
-                    }
+
 
                     UpdateClientCubit.get(context).updateClient(widget.clientEntity);
 

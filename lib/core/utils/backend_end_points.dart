@@ -10,4 +10,6 @@ abstract class BackendEndPoints{
   static const String checkDateAdded='allClients';
   static const String getDate='allClients';
   static const String addDate='allClients';
+  static const String uploadImage='https://ruhaprwm.a2hosted.com/Cocacola_pic/upload.php';
+
 }

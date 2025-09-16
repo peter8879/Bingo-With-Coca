@@ -49,7 +49,7 @@ class _IdCheckViewBodyState extends State<IdCheckViewBody> {
                   padding: const EdgeInsets.symmetric(horizontal: 5),
                   child: Text(
                     'البحث عن '
-                        'رقم بطاقة او هاتف العميل',
+                        'رقم بطاقة العميل',
                     textAlign: TextAlign.center,
                     style: AppTextStyles.bold40.copyWith(color: Colors.white),
                   ),
@@ -63,7 +63,7 @@ class _IdCheckViewBodyState extends State<IdCheckViewBody> {
                   onChanged: (value){
                     globalKey.currentState!.validate();
                   },
-                  hint: 'الرقم القومى او رقم الهاتف للعميل',
+                  hint: 'الرقم القومى  للعميل',
                   keyboardType: TextInputType.number,
                   suffixIcon: Image.asset(
                     'assets/images/ID Check Icon.png',
@@ -84,19 +84,8 @@ class _IdCheckViewBodyState extends State<IdCheckViewBody> {
 
                     else
                       {
-                        if (value.length < 11) {
-                          return 'قيمة غير صالحه';
-                        }
-                        else if(value.length==11)
-                          {
-                             const  pattern = r'^(\+201|01|00201)[0-2,5]{1}[0-9]{8}$';
-                            final regex = RegExp(pattern);
 
-                            if (!regex.hasMatch(value)) {
-                              return 'رقم هاتف غير صحيح';
-                            }
-                          }
-                        else if(value.length==12||value.length==13)
+                         if(value.length<14)
                         {
                           return 'قيمة غير صالحه';
                         }

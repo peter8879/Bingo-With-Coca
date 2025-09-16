@@ -4,6 +4,7 @@ import 'package:bingo_with_coca/core/entites/prize_entity.dart';
 import 'package:bingo_with_coca/core/helper_function/build_error_bar.dart';
 import 'package:bingo_with_coca/core/helper_function/build_success_bar.dart';
 import 'package:bingo_with_coca/core/utils/app_text_styles.dart';
+import 'package:bingo_with_coca/core/widgets/custom_button.dart';
 import 'package:bingo_with_coca/features/prize_select/presentation/views/widgets/prize_widget.dart';
 import 'package:bingo_with_coca/features/id_check/presentation/views/id_check_view.dart';
 import 'package:bingo_with_coca/features/prize_select/presentation/cuibits/add_prize_cuibit/add_prizecubit_cubit.dart';
@@ -22,6 +23,7 @@ class SelectPrizeViewBody extends StatefulWidget {
 class _SelectPrizeViewBodyState extends State<SelectPrizeViewBody> {
   String value='مكواه';
   bool isSure=false;
+  Widget? _photo;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AddPrizeCubit, AddPrizeState>(
@@ -106,8 +108,45 @@ class _SelectPrizeViewBodyState extends State<SelectPrizeViewBody> {
               ],
             ),
             const SizedBox(height: 40,),
+
+            CustomButton(
+              text: 'اختيار الصورة',
+              onPressed: ()async{
+                await AddPrizeCubit.get(context).takeAndProcessWebImage();
+                if(AddPrizeCubit.get(context).myImageFile!=null)
+                  {
+                    _photo = Image.memory(
+                      AddPrizeCubit.get(context).myImageFile!.bytes!,
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      height: double.infinity,
+                    );
+                    setState(() {});
+                  }
+              },
+
+            ),
+            const SizedBox(height: 10,),
+            Container(
+              height: 200,
+              decoration: BoxDecoration(
+                color: const Color(0xFFF8FAFC),
+                borderRadius: BorderRadius.circular(14),
+                border: Border.all(color: const Color(0xFFE5E7EB)),
+              ),
+              alignment: Alignment.center,
+              child: _photo == null
+                  ? const Icon(Icons.photo_camera_outlined, size: 64, color: Colors.black45)
+                  : ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: _photo,
+              ),
+            ),
+            const SizedBox(height: 40,),
+
+            const SizedBox(height: 40,),
             GestureDetector(
-              onTap: (){
+              onTap: ()async{
                 if(isSure==true)
                 {
                   if(widget.clientEntity.prizes==null)
@@ -152,8 +191,16 @@ class _SelectPrizeViewBodyState extends State<SelectPrizeViewBody> {
                     widget.clientEntity.paymentHistory=null;
                   }
                   widget.clientEntity.paymentHistory=null;
+                  if(AddPrizeCubit.get(context).myImageFile==null)
+                  {
+                    buildErrorBar(context, 'من فضلك قم باختيار صورة');
 
-                  AddPrizeCubit.get(context).addPrize(widget.clientEntity);
+                  }
+                  else{
+                    await AddPrizeCubit.get(context).addPrize(widget.clientEntity,AddPrizeCubit.get(context).myImageFile!,widget.clientEntity.prizes!.length-1);
+                  }
+
+
                 }
                 else
                 {
