@@ -11,8 +11,10 @@ class PrizeModel{
   final String pack3Date;
   final String pack3Branch;
    String ?image;
+  String ?longitude;
+  String? latitude;
 
-  PrizeModel( {required this.name, required this.date,required this.prizeBranch, required this.pack1Date, required this.pack1Branch, required this.pack2Date, required this.pack2Branch, required this.pack3Date, required this.pack3Branch,this.image});
+  PrizeModel( {required this.name, required this.date,required this.prizeBranch, required this.pack1Date, required this.pack1Branch, required this.pack2Date, required this.pack2Branch, required this.pack3Date, required this.pack3Branch,this.image,this.longitude,this.latitude});
 
   Map<String,dynamic> toMap()
   {
@@ -27,6 +29,8 @@ class PrizeModel{
       'pack3Date':pack3Date,
       'pack3Branch':pack3Branch,
       'image':image,
+      'longitude':longitude,
+      'latitude':latitude,
     };
   }
   factory PrizeModel.fromJson(Map<String,dynamic> json)
@@ -42,6 +46,8 @@ class PrizeModel{
       pack3Date: json['pack3Date'],
       pack3Branch: json['pack3Branch'],
       image: json['image'],
+      longitude: json['longitude'],
+      latitude: json['latitude'],
     );
   }
   factory PrizeModel.fromEntity(PrizeEntity entity)
@@ -57,6 +63,8 @@ class PrizeModel{
       pack3Date: entity.pack3Date,
       pack3Branch: entity.pack3Branch,
       image: entity.image,
+      latitude: entity.latitude,
+      longitude: entity.longitude
     );
   }
   PrizeEntity toEntity()
@@ -72,6 +80,8 @@ class PrizeModel{
       pack3Date: pack3Date,
       pack3Branch: pack3Branch,
       image: image,
+      latitude: latitude,
+      longitude: longitude
     );
   }
 }

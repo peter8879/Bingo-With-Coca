@@ -197,7 +197,15 @@ class _SelectPrizeViewBodyState extends State<SelectPrizeViewBody> {
 
                   }
                   else{
-                    await AddPrizeCubit.get(context).addPrize(widget.clientEntity,AddPrizeCubit.get(context).myImageFile!,widget.clientEntity.prizes!.length-1);
+                    if(AddPrizeCubit.get(context).myLocation!=null)
+                      {
+                        await AddPrizeCubit.get(context).addPrize(widget.clientEntity,AddPrizeCubit.get(context).myImageFile!,widget.clientEntity.prizes!.length-1);
+
+                      }
+                    else
+                      {
+                     buildErrorBar(context, 'من فضلك تاكد من خدمة الموقع لديك');
+                      }
                   }
 
 

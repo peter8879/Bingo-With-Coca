@@ -1,10 +1,13 @@
+import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:bingo_with_coca/core/entites/client_entity.dart';
 import 'package:bingo_with_coca/core/repos/update_client_repo.dart';
 import 'package:bingo_with_coca/core/repos/upload_image_repo.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
 import 'package:image/image.dart' as img;
@@ -19,7 +22,42 @@ class AddPrizeCubit extends Cubit<AddPrizeState> {
 
   PlatformFile? myImageFile;
 
+  Position? myLocation;
 
+  Future<Position> getLatLngOrThrow() async {
+    // 1) Services enabled?
+    final serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      throw 'من فضلك قم بتشغيل خدمة الموقع';
+    }
+
+    // 2) Permission flow
+    var permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+    }
+
+    if (permission == LocationPermission.denied) {
+      throw 'من فضلك قم باعطاء اذن الوصول للموقع';
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      throw kIsWeb
+          ? 'Location is blocked in the browser. Allow location for this site (padlock → Site settings → Location → Allow), then reload.'
+          : 'من فضلك قم باعطاء اذن الوصول للموقع';
+    }
+
+    // 3) Single fix with a hard timeout
+    try {
+      return await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+      ).timeout(const Duration(seconds: 12));
+    } on TimeoutException {
+      throw 'هناك مشكلة بالانترنت من فضلك اعد المحاولة';
+    } catch (e) {
+      throw 'هناك مشكلة بالانترنت من فضلك اعد المحاولة';
+    }
+  }
   Future<void> takeAndProcessWebImage() async {
     emit(PickImageLoading());
     final ImagePicker picker = ImagePicker();
@@ -61,7 +99,14 @@ class AddPrizeCubit extends Cubit<AddPrizeState> {
 
 
       myImageFile = resultFile;
-      emit(PickImageSuccess());
+      try{
+        var location=await getLatLngOrThrow();
+        myLocation=location;
+        emit(PickImageSuccess());
+      }
+      catch(e){
+        emit(PickImageFailure(e.toString()));
+      }
 
 
     } catch (e) {
@@ -95,6 +140,8 @@ class AddPrizeCubit extends Cubit<AddPrizeState> {
         }
         ,(r) async{
           clientEntity.prizes![index].image=r;
+          clientEntity.prizes![index].longitude=myLocation!.longitude.toString();
+          clientEntity.prizes![index].latitude=myLocation!.latitude.toString();
       var result=await updateClientRepo.updateClient(clientEntity);
       result.fold((failure) {
         emit(AddPrizeFailure(failure.message));

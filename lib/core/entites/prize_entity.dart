@@ -12,8 +12,10 @@ class PrizeEntity
   final String pack3Date;
   final String pack3Branch;
    String ?image;
+   String ?longitude;
+   String? latitude;
 
-  PrizeEntity( {required this.name, required this.date,required this.prizeBranch ,required this.pack1Date, required this.pack1Branch, required this.pack2Date, required this.pack2Branch, required this.pack3Date, required this.pack3Branch,this.image});
+  PrizeEntity( {required this.name, required this.date,required this.prizeBranch ,required this.pack1Date, required this.pack1Branch, required this.pack2Date, required this.pack2Branch, required this.pack3Date, required this.pack3Branch,this.image,this.longitude,this.latitude});
 
   PrizeModel toModel()
   {
@@ -27,7 +29,9 @@ class PrizeEntity
       pack2Branch: pack2Branch,
       pack3Date: pack3Date,
       pack3Branch: pack3Branch,
-      image: image
+      image: image,
+      longitude: longitude,
+      latitude: latitude,
     );
   }
 }

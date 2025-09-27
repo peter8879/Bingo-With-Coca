@@ -108,12 +108,10 @@ class _AddClientViewBodyState extends State<AddClientViewBody> {
                     }
                     else
                       {
-                        if (value.length < 11) {
-                          return 'رقم هاتف غير صالح';
-                        }
-                        else if (value.length > 11) {
-                          return 'رقم هاتف غير صالح';
-                        }
+                        if(!isValidEgyptianPhoneNumber(value))
+                          {
+                            return 'رقم هاتف غير صالح';
+                          }
                       }
 
                     return null;
@@ -158,3 +156,12 @@ class _AddClientViewBodyState extends State<AddClientViewBody> {
 );
   }
 }
+/// Validates an 11-digit Egyptian mobile phone number.
+/// Returns true if the number is valid, false otherwise.
+bool isValidEgyptianPhoneNumber(String input) {
+  // Regex for 11-digit Egyptian phone numbers (01xxxxxxxxx)
+  final RegExp phoneRegex = RegExp(r'^01[0125]\d{8}$');
+
+  return phoneRegex.hasMatch(input);
+}
+
